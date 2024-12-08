@@ -1,0 +1,36 @@
+﻿@model Simple_Calculator.Models.Calculator
+@*Model class imported now we can accessing it properties by objects*@
+
+@{
+    ViewBag.Title = "Calculator";
+}
+
+<h1>ICalculator</h1>
+
+@using (Html.BeginForm("Index", "Calculate", FormMethod.Post))
+{
+    <div>
+        @Html.TextBoxFor(m => m.Number1, new { @class = "form-control", placeholder = "Enter First Number" })
+        @Html.ValidationMessageFor(m => m.Number1)
+    </div>
+    <div>
+        @Html.TextBoxFor(m => m.Number2, new { @class = "form-control", placeholder = "Enter Second Number" })
+        @Html.ValidationMessageFor(m => m.Number2)
+    </div>
+    <div>
+        @Html.DropDownListFor(m => m.Operation,
+            new SelectList(new[] { "Add", "Subtract", "Multiply", "Divide" }, "Operation"),
+            new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Operation)
+    </div>
+    <div>
+        <input type="submit" value="Calculate" class="btn btn-primary" />
+    </div>
+}
+@if (Model.Result != null)
+{
+    <div>
+        <h3>Result: @Model.Result</h3>
+    </div>
+}
+
